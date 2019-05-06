@@ -1,0 +1,14 @@
+---
+type: Asset
+api_version: core/v2
+metadata:
+  name: sensu-plugins-cpu-checks
+  namespace: default
+  labels: {}
+  annotations: {}
+spec:
+  url: https://github.com/sensu-plugins/sensu-plugins-cpu-checks/releases/download/4.0.0/sensu-plugins-cpu-checks_4.0.0_alpine_linux_amd64.tar.gz
+  sha512: b2da25ecd7642e6de41fde37d674fe19dcb6ee3d680e145e32289f7cfc352e6b5f9413ee9b701d61faeaa47b399aa30b25885dbc1ca432c4061c8823774c28f3
+  filters:
+  - entity.system.os == 'linux'
+  - entity.system.arch == 'amd64'

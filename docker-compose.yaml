@@ -1,0 +1,33 @@
+version: '3'
+services: 
+  sensu-backend:
+    image: "sensu/sensu:latest"
+    ports:
+      - "3000:3000"
+      - "2379:2379"
+      - "2380:2380"
+      - "8080:8080"
+      - "8081:8081"
+    command: "sensu-backend start"
+    volumes: 
+      - "/tmp/sensu:/var/lib/sensu"
+    hostname: sensu-backend
+  sensu-agent:
+    image: "sensu/sensu:latest"
+    command: "sensu-agent start --backend-url ws://sensu-backend:8081 --subscriptions dev poller system linux docker --cache-dir /var/lib/sensu --namespace default --deregister true"
+    links: 
+      - "sensu-backend:backend"
+    depends_on: 
+      - sensu-backend
+    hostname: sensu-agent
+  sensu-asset-server:
+    image: nginx:latest
+    ports:
+    - 8000:80
+    volumes:
+    - "./config/nginx/nginx.conf:/etc/nginx/nginx.conf"
+    - "./assets:/usr/share/nginx/html/assets"
+    depends_on:
+    - sensu-backend # not actually true; only used for demo purposes
+    links: 
+      - "sensu-backend:backend"

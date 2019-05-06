@@ -1,0 +1,31 @@
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: check-cpu-usage
+  namespace: default
+spec:
+  check_hooks: null
+  command: check-cpu.rb
+  env_vars: null
+  handlers: []
+  high_flap_threshold: 0
+  interval: 60
+  low_flap_threshold: 0
+  output_metric_format: ""
+  output_metric_handlers: null
+  proxy_entity_name: ""
+  publish: true
+  round_robin: false
+  runtime_assets:
+  - sensu-ruby-runtime
+  - sensu-plugins-cpu-checks
+  stdin: false
+  subdue: null
+  subscriptions:
+  - proxy
+  - prod
+  - staging
+  - qa
+  - dev
+  timeout: 0
+  ttl: 0

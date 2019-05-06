@@ -1,0 +1,17 @@
+---
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: helloworld
+  namespace: default
+  labels: {}
+  annotations: {}
+spec:
+  command: "/opt/sensu-plugins-ruby/embedded/bin/ruby helloworld.rb"
+  runtime_assets:
+  - ruby-hello-world
+  - sensu-ruby-runtime
+  publish: true
+  interval: 10
+  subscriptions:
+  - dev
