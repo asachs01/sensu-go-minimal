@@ -14,7 +14,7 @@ services:
     hostname: sensu-backend
   sensu-agent:
     image: "sensu/sensu:latest"
-    command: "sensu-agent start --backend-url ws://sensu-backend:8081 --subscriptions dev poller system linux docker --cache-dir /var/lib/sensu --namespace default --deregister true"
+    command: "sensu-agent start --backend-url ws://sensu-backend:8081 --subscriptions dev,poller,system,linux,docker --cache-dir /var/lib/sensu --namespace default --deregister true"
     links: 
       - "sensu-backend:backend"
     depends_on: 
